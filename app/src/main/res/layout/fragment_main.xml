@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <TextView
+        android:id="@+id/tv_title_main"
+        android:layout_width = "wrap_content"
+        android:layout_height = "wrap_content"
+        android:text = "小学四则运算"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        />
+
+    <per.goweii.actionbarex.ActionBarEx
+        android:id="@+id/tb_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        app:ab_bottomLineColor="@color/divide_line"
+        app:ab_bottomLineHeight="1dp"
+        app:ab_statusBarColor="@color/transparent"
+        app:ab_statusBarMode="dark"
+        app:ab_statusBarVisible="true"
+        app:ab_titleBarHeight="60dp"
+        app:ab_titleBarLayout="@layout/title_bar_center_title"
+        />
+
+
+
+    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+        android:id="@+id/tfb_range"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:labelText="题目数字范围"
+        android:layout_below="@id/tb_home"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:panelBackgroundColor="#50FFFFFF"
+        app:iconSignifier="@android:drawable/ic_menu_agenda"
+        app:isResponsiveIconColor="true"
+        app:primaryColor="#148F77"
+        app:secondaryColor="@color/colorAccent"
+        app:helperText="请输入大于等于1的自然数"
+        >
+
+        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+            android:id="@+id/et_range"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:prefix="范围为 1 - "
+            app:suffix="    以内"
+            app:prefixTextColor = "@color/shallow_gray"
+            app:suffixTextColor="@color/shallow_gray"
+            android:inputType="number"
+            />
+
+    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+        android:id="@+id/tfb_question_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tfb_range"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:labelText="题目数量"
+        app:panelBackgroundColor="#50FFFFFF"
+        app:iconSignifier="@android:drawable/ic_menu_sort_by_size"
+        app:isResponsiveIconColor="true"
+        app:primaryColor="#148F77"
+        app:secondaryColor="@color/colorAccent"
+        app:helperText="请输入10000以内的整数"
+        >
+
+        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+            android:id="@+id/et_question_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:prefix="生成    "
+            app:suffix="    条四则运算题目"
+            app:prefixTextColor = "@color/shallow_gray"
+            app:suffixTextColor="@color/shallow_gray"
+            android:inputType="number"
+            />
+
+    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+    <com.deadline.statebutton.StateButton
+        android:id="@+id/btn_generate_questions"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@id/tfb_question_count"
+        android:layout_alignStart="@id/tfb_range"
+        android:layout_alignEnd="@id/tfb_range"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="0dp"
+        android:enabled="false"
+        android:stateListAnimator="@null"
+        android:text="查看题目"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:normalBackgroundColor="#16A1EF"
+        app:pressedBackgroundColor="#2A84B7"
+        app:statebutton_radius="5dp"
+        app:unableBackgroundColor="@color/deep_gray" />
+
+    <com.deadline.statebutton.StateButton
+        android:id="@+id/btn_direct_practise"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@id/btn_generate_questions"
+        android:layout_marginTop="20dp"
+        android:stateListAnimator="@null"
+        android:text="练习答题"
+        android:layout_alignStart="@id/tfb_range"
+        android:layout_alignEnd="@id/tfb_range"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:statebutton_radius="5dp"
+        app:unableBackgroundColor="@color/deep_gray"
+        app:normalBackgroundColor="#FAD11C"
+        app:pressedBackgroundColor="#E4C53E"
+        android:enabled="false"
+        />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/btn_direct_practise"
+        android:src="@drawable/ic_drawkit_grape_pack_illustration_7"
+        android:layout_marginTop="5dp"
+        />
+
+
+
+
+</RelativeLayout>

@@ -1,0 +1,101 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.didi.dokit'
+
+
+android {
+    compileSdkVersion 30
+
+    defaultConfig {
+        applicationId "com.odm.calculatepractice"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+
+dokitExt {
+    //通用设置
+    comm {
+        //地图经纬度开关
+        gpsSwitch true
+        //网络开关
+        networkSwitch true
+        //大图开关
+        bigImgSwitch true
+    }
+
+    slowMethod {
+        //调用栈模式配置
+        stackMethod {
+            //默认值为 5ms 小于该值的函数在调用栈中不显示
+            thresholdTime 5
+            //调用栈函数入口
+            enterMethods = ["com.odm.calculatepractice.application.App.attachBaseContext"]
+        }
+        //普通模式配置
+        normalMethod {
+            //默认值为 300ms 小于该值的函数在运行时不会在控制台中被打印
+            thresholdTime 300
+            //需要针对函数插装的包名
+            packageNames = ["com.odm.calculatepractice"]
+            //不需要针对函数插装的包名&类名
+            methodBlacklist = []
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation 'com.github.HITGIF:TextFieldBoxes:1.4.5'
+
+    //减少shape和selector的按钮
+    implementation 'com.github.qwasnm789:StateButton:1.0.1'
+
+    //Fragment管理框架
+    implementation 'me.xuexuan:fragmentationx:1.0.5'
+
+    implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha06'
+
+    //RecyclerView BaseAdapter
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.2'
+
+    //线程切换
+    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
+
+    //工具类库
+    implementation 'com.blankj:utilcodex:1.29.0'
+
+    //弹窗类UI
+    def xpopupVersion = "2.0.8-rc5"
+    implementation "com.lxj:xpopup:$xpopupVersion"
+
+    //顶部标题
+    implementation 'com.github.goweii.ActionBarEx:actionbarex:3.2.2'
+
+    debugImplementation 'com.didichuxing.doraemonkit:doraemonkit:3.2.0'
+    releaseImplementation 'com.didichuxing.doraemonkit:doraemonkit-no-op:3.2.0'
+
+
+
+}

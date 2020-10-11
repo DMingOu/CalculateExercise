@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#80DCDCDC"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <per.goweii.actionbarex.ActionBarEx
+        android:id="@+id/tb_report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/deep_blue"
+        app:ab_bottomLineColor="@color/divide_line"
+        app:ab_bottomLineHeight="1dp"
+        app:ab_statusBarColor="@color/transparent"
+        app:ab_statusBarMode="dark"
+        app:ab_statusBarVisible="true"
+        app:ab_titleBarHeight="60dp"
+        app:ab_titleBarLayout="@layout/title_bar_left_back_right_button"
+        />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/rl_score_report"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shape_yellow_radius_10"
+                >
+
+                <TextView
+                    android:id="@+id/tv_correct_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="回答正确：  100道"
+                    android:textColor="@color/white"
+                    android:typeface="monospace"
+                    android:textSize="20sp"
+                    android:layout_marginStart="20dp"
+                    android:layout_alignTop="@id/trp_percent_correct"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_total_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="总题数："
+                    android:textSize="20sp"
+                    android:textColor="@color/white"
+                    android:typeface="monospace"
+                    android:layout_alignBottom="@id/trp_percent_correct"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="18dp"
+                    />
+
+                <com.odm.calculatepractice.widget.TextRoundProgress
+                    android:id="@+id/trp_percent_correct"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:trp_max="100"
+                    app:trp_numSize="22sp"
+                    android:layout_centerVertical="true"
+                    app:trp_progressColor="@color/correct_green"
+                    app:trp_roundColor="@color/white"
+                    app:trp_roundWidth="10dp"
+                    app:trp_startAngle="0"
+                    app:trp_text="答题正确率"
+                    app:trp_textColor="@color/black"
+                    app:trp_textSize="12sp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="20dp"
+                    />
+            </RelativeLayout>
+
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_questions_report"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_score_report"
+                tools:listitem="@layout/item_question_report"
+                tools:itemCount="2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                />
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>
+

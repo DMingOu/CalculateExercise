@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <per.goweii.actionbarex.ActionBarEx
+        android:id="@+id/tb_question_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:ab_bottomLineColor="@color/divide_line"
+        app:ab_bottomLineHeight="1dp"
+        app:ab_statusBarColor="@color/transparent"
+        app:ab_statusBarMode="dark"
+        app:ab_statusBarVisible="true"
+        app:ab_titleBarHeight="60dp"
+        app:ab_titleBarLayout="@layout/title_bar_left_back_right_button"
+        />
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_back_question_list"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_arrorw_left_black"
+                android:layout_marginTop="23dp"
+                android:layout_marginStart="15dp"
+                android:visibility="gone"
+                />
+
+            <TextView
+                android:id="@+id/tv_title_question_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="四则运算题列表"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"
+                android:visibility="gone"
+                />
+
+            <TextView
+                android:id="@+id/tv_range_question_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="数字范围：1 至 "
+                android:textSize="14sp"
+                android:textColor="#000000"
+                android:layout_marginStart="20dp"
+                android:layout_below="@id/tv_title_question_list"
+                android:layout_marginTop="5dp"
+                />
+
+            <TextView
+                android:id="@+id/tv_count_question_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="题目数量： "
+                android:textSize="14sp"
+                android:textColor="#000000"
+                android:layout_centerHorizontal="true"
+                android:layout_toEndOf="@id/tv_range_question_list"
+                android:layout_marginStart="30dp"
+                android:layout_alignBottom="@id/tv_range_question_list"
+                android:layout_marginTop="5dp"
+                />
+
+            <TextView
+                android:id="@+id/tv_tips_question_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text = "tips:xxxxx"
+                android:textSize="14sp"
+                android:textColor="#000000"
+                android:layout_alignStart="@id/tv_range_question_list"
+                android:layout_below="@id/tv_count_question_list"
+                android:layout_marginTop="8dp"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_question_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_tips_question_list"
+                tools:listitem="@layout/item_question"
+                tools:itemCount="30"
+                />
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</LinearLayout>

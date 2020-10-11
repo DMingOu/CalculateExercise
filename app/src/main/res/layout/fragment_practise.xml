@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <per.goweii.actionbarex.ActionBarEx
+        android:id="@+id/tb_practise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="#FFFFFF"
+        app:ab_bottomLineColor="@color/divide_line"
+        app:ab_bottomLineHeight="1dp"
+        app:ab_statusBarColor="@color/white"
+        app:ab_statusBarMode="light"
+        app:ab_statusBarVisible="true"
+        app:ab_titleBarHeight="60dp"
+        app:ab_titleBarLayout="@layout/title_bar_left_back_right_button"
+        />
+
+    <TextView
+        android:id="@+id/tv_current_practise"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text = "1 +2 +3 +4 = ?"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="50dp"
+        android:layout_below="@id/tb_practise"
+        android:background="@drawable/shape_yellow_radius_10"
+        />
+
+    <EditText
+        android:id="@+id/et_student_answer_practise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_current_practise"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:hint="输入答案(示例: 10/3)"
+        android:digits="1234567890/"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textScaleX="1.0"
+        android:textSize="24sp"
+        android:typeface="monospace" />
+
+    <ImageButton
+        android:id="@+id/btn_next_practise"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/ic_next_blue"
+        android:layout_below="@id/et_student_answer_practise"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:stateListAnimator="@null"
+        />
+
+
+
+
+
+</RelativeLayout>
