@@ -20,7 +20,7 @@ enum class OperatorEnum(
      * 运算符对应索引
      */
     var opValue: Int, priority: Int
-) : OperationService {
+) : IOperation {
     /**
      * 加法
      */

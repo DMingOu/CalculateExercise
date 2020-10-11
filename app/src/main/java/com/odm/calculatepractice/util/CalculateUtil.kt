@@ -7,40 +7,10 @@ import com.odm.calculatepractice.util.OtherUtil.searchStr
 import java.util.*
 
 /**
- * 用于处理计算
+ * 处理计算
  */
 object CalculateUtil {
-    /*    //用于测试增加的 main 方法
-    public static void main(String[] args) {
-        String s = getImproperFraction("1'1/2");
-        System.out.println(s);
-        int n = getNumerator("1'1/2");
-        System.out.println(n);
-        int d = getDenominator("1'1/2");
-        System.out.println(d);
-        String[] str = switchToCommonDenominator("1'1/2", "2/3");
-        System.out.println(str[0] + "\n" + str[1]);
-    }*/
-    /**
-     * 将带分数数化成假分数形式,如过传入的不是带分数，则不做改动，原数返回
-     *
-     * @param operand 操作数
-     * @return 假分数
-     */
-    fun getImproperFraction(operand: String): String {
-        //检测是否为真分数
-        return if (searchStr("'", operand) != 0) {
-            val str = operand.split("['/]".toRegex()).toTypedArray()
-            //分子
-            val numerator = str[0].toInt() * str[2].toInt() + str[1].toInt()
 
-            //分母
-            val denominator = str[2].toInt()
-            "$numerator/$denominator"
-        } else {
-            operand
-        }
-    }
 
     /**
      * 获取分数的分子
@@ -163,6 +133,26 @@ object CalculateUtil {
             str
         }
     }
+    /**
+     * 将带分数数化成假分数形式,如过传入的不是带分数，则不做改动，原数返回
+     *
+     * @param operand 操作数
+     * @return 假分数
+     */
+    fun getImproperFraction(operand: String): String {
+        //检测是否为真分数
+        return if (searchStr("'", operand) != 0) {
+            val str = operand.split("['/]".toRegex()).toTypedArray()
+            //分子
+            val numerator = str[0].toInt() * str[2].toInt() + str[1].toInt()
+
+            //分母
+            val denominator = str[2].toInt()
+            "$numerator/$denominator"
+        } else {
+            operand
+        }
+    }
 
     /**
      * 求两数的最大公约数
@@ -186,6 +176,73 @@ object CalculateUtil {
         }
         return Math.max(numerator, denominator)
     }
+
+
+    /**
+     * 工具方法：返回不带题号的答案
+     * @param answer 答案
+     * @return 不带题号的答案
+     */
+    fun parseAnswer(answer: String): String {
+        return answer.split("\\.".toRegex()).toTypedArray()[1]
+    }
+
+    /**
+     * 将题目解析成Exercises对象的属性
+     *
+     * @param question 问题字符串
+     */
+    private fun parseQuestion(exercise: Exercise, question: String) {
+        var expression = question.split("\\.".toRegex()).toTypedArray()[1].replace("\\=", "")
+        val queue: Queue<String> = LinkedList()
+        val valueList = ArrayList<String>()
+        queue.add(expression)
+        while (true) {
+            expression = queue.remove()
+            //如果是运算符则继续解析
+            if (isExpression(expression)) {
+                val operatorAndNumber = getOperatorAndNumber(expression)
+                //保存运算符
+                valueList.add(operatorAndNumber[1])
+                //将操作时或者子表达式入队
+                queue.add(operatorAndNumber[2])
+                queue.add(operatorAndNumber[0])
+            } else {
+                //还没加入操作数时valuelist的大小时运算符个数
+                exercise.operatorNumber = valueList.size
+                //第一个元素已经被remove所以单独add
+                valueList.add(expression)
+                valueList.addAll(queue)
+                exercise.valueList = valueList
+                break
+            }
+        }
+    }
+
+    /**
+     * 解析获取题目中的题号
+     *
+     * @param exercise 题目信息实体类
+     * @param question 问题字符串
+     */
+    private fun parseNumber(exercise: Exercise, question: String) {
+        exercise.number = question.split("\\.".toRegex()).toTypedArray()[0].toInt()
+    }
+
+    /**
+     * 返回与一个表达式等价的最简状态的式子
+     * @return  一个表达式等价的最简状态的式子
+     */
+    fun getEqualsExpression(expression: String): String {
+        val operator =
+            "(\\" + Constant.PLUS + "|\\" + Constant.MINUS + "|\\" + Constant.MULTIPLY + "|\\" + Constant.DIVIDE + ")"
+        //操作数交换
+        return expression.split(operator.toRegex()).toTypedArray()[1] + getStr(
+            operator,
+            expression
+        ) + expression.split(operator.toRegex()).toTypedArray()[0]
+    }
+
 
     /**
      * 随机生成指定范围内数字
@@ -298,68 +355,5 @@ object CalculateUtil {
         return exercises
     }
 
-    /**
-     * 工具方法：返回不带题号的答案
-     * @param answer 答案
-     * @return 不带题号的答案
-     */
-    fun parseAnswer(answer: String): String {
-        return answer.split("\\.".toRegex()).toTypedArray()[1]
-    }
 
-    /**
-     * 将题目解析成Exercises对象的属性
-     *
-     * @param question 问题字符串
-     */
-    private fun parseQuestion(exercise: Exercise, question: String) {
-        var expression = question.split("\\.".toRegex()).toTypedArray()[1].replace("\\=", "")
-        val queue: Queue<String> = LinkedList()
-        val valueList = ArrayList<String>()
-        queue.add(expression)
-        while (true) {
-            expression = queue.remove()
-            //如果是运算符则继续解析
-            if (isExpression(expression)) {
-                val operatorAndNumber = getOperatorAndNumber(expression)
-                //保存运算符
-                valueList.add(operatorAndNumber[1])
-                //将操作时或者子表达式入队
-                queue.add(operatorAndNumber[2])
-                queue.add(operatorAndNumber[0])
-            } else {
-                //还没加入操作数时valuelist的大小时运算符个数
-                exercise.operatorNumber = valueList.size
-                //第一个元素已经被remove所以单独add
-                valueList.add(expression)
-                valueList.addAll(queue)
-                exercise.valueList = valueList
-                break
-            }
-        }
-    }
-
-    /**
-     * 解析获取题目中的题号
-     *
-     * @param exercise 题目信息实体类
-     * @param question 问题字符串
-     */
-    private fun parseNumber(exercise: Exercise, question: String) {
-        exercise.number = question.split("\\.".toRegex()).toTypedArray()[0].toInt()
-    }
-
-    /**
-     * 返回与一个表达式等价的最简状态的式子
-     * @return  一个表达式等价的最简状态的式子
-     */
-    fun getEqualsExpression(expression: String): String {
-        val operator =
-            "(\\" + Constant.PLUS + "|\\" + Constant.MINUS + "|\\" + Constant.MULTIPLY + "|\\" + Constant.DIVIDE + ")"
-        //操作数交换
-        return expression.split(operator.toRegex()).toTypedArray()[1] + getStr(
-            operator,
-            expression
-        ) + expression.split(operator.toRegex()).toTypedArray()[0]
-    }
 }
