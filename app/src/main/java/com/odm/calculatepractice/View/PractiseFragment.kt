@@ -9,6 +9,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.odm.calculatepractice.R
 import com.odm.calculatepractice.bean.Exercise
@@ -156,9 +157,11 @@ class PractiseFragment : BaseFragment(){
     private fun checkCurrentExerciseAnswer() {
         //当前还有题目没有开启
         if(currentIndex <= totalCount) {
-            //判定输入框填写的答案 -> 当前题目完成情况
-            currentExercise?.studentAnswer = et_student_answer_practise.text.toString()
-            when(et_student_answer_practise.text.toString()) {
+            //判定输入框填写的答案 视为 当前题目完成情况
+            //去掉答案输入的空格
+            val studentAnswerString = et_student_answer_practise.text.toString().replace(" ","")
+            currentExercise?.studentAnswer = studentAnswerString
+            when(studentAnswerString) {
                 //无作答
                 "" -> ToastUtils.showShort("请作答！")
                 //回答正确
