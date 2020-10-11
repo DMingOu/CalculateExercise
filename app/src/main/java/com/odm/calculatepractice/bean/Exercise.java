@@ -158,8 +158,6 @@ public class Exercise {
         return index;
     }
 
-
-
     public void setNumber(int index) {
         this.index = index;
     }

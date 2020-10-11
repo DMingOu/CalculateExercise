@@ -44,7 +44,7 @@ class QuestionListFragment : BaseFragment() {
 
     private var rangeMax =  0
 
-    private val PAGE_SIZE = 100
+    private val PAGE_SIZE = 50
 
     /**
      * 已加载的页数
